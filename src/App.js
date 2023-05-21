@@ -1,40 +1,38 @@
-import React from 'react';
 import {
   ChakraProvider,
   Box,
-  Text,
-  Link,
-  VStack,
-  Code,
-  Grid,
-  theme,
+  Stat,
 } from '@chakra-ui/react';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
-import { Logo } from './Logo';
+import { BrowserRouter ,Routes, Route } from 'react-router-dom';
+import PageNotFound from './Components/PageNotFound/PageNotFound';
+import HomePage from './Pages/HomePage/HomePage';
+import LevelPage from './Pages/LevelsPage/LevelsPage';
+import SingleLevelPage from './Pages/SingleLevelPage/SingleLevelPage';
+import theme from './utils/theme';
+import { appStyleObj } from './AppStyle';
+import PlayGame from './Components/PlayGame/PlayGame';
+import ResultPage from './Pages/ResultPage/ResultPage';
+import './App.css';
 
 function App() {
+  localStorage.setItem("chakra-ui-color-mode","dark");
+
   return (
     <ChakraProvider theme={theme}>
-      <Box textAlign="center" fontSize="xl">
-        <Grid minH="100vh" p={3}>
-          <ColorModeSwitcher justifySelf="flex-end" />
-          <VStack spacing={8}>
-            <Logo h="40vmin" pointerEvents="none" />
-            <Text>
-              Edit <Code fontSize="xl">src/App.js</Code> and save to reload.
-            </Text>
-            <Link
-              color="teal.500"
-              href="https://chakra-ui.com"
-              fontSize="2xl"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn Chakra
-            </Link>
-          </VStack>
-        </Grid>
-      </Box>
+      <BrowserRouter>
+        <Box  style={appStyleObj.mainBox}>
+          <Box  style={appStyleObj.innerBox}>
+              <Routes>
+                <Route exact path='/' element={<HomePage/>} />
+                <Route exact path='/levels' element={<LevelPage/>} />
+                <Route path='/level/:id' element={<SingleLevelPage/>} />
+                <Route path='/play' element={<PlayGame/>} />
+                <Route path='/result' element={<ResultPage/>} />
+                <Route path='*' element={<PageNotFound/>} />
+              </Routes>
+          </Box>
+        </Box>
+      </BrowserRouter>
     </ChakraProvider>
   );
 }
