@@ -4,6 +4,7 @@ import { HiHome } from 'react-icons/hi';
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import ConfettiExplosion from 'react-confetti-explosion';
 
 function ResultPage(props){
     const navigate = useNavigate();
@@ -16,6 +17,7 @@ function ResultPage(props){
     },[]);
     return (
         <Box    textAlign="center"
+                position={'relative'}
                 width='100%'
                 fontSize="xl"
                 display='flex'
@@ -48,6 +50,13 @@ function ResultPage(props){
                 <Button margin={'0 0.25rem'} onClick={()=>{ navigate(locationData?.state?.back_route) }}>
                     <Icon boxSize={6} as={HiHome} />
                 </Button>
+            </Box>
+            <Box position={'absolute'}
+                 display={'flex'}
+                 alignItems={'center'}
+                 justifyContent={'center'}
+                 zIndex={2}>
+                <ConfettiExplosion  duration={5000}/>
             </Box>
         </Box>
     );

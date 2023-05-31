@@ -13,8 +13,12 @@ import { appStyleObj } from './AppStyle';
 import PlayGame from './Components/PlayGame/PlayGame';
 import ResultPage from './Pages/ResultPage/ResultPage';
 import './App.css';
+import { useEffect } from 'react';
+import useAppContext from './context/useAppContext';
+import { AppActions } from './context/constants';
 
 function App() {
+  const {dispatch} = useAppContext();
   localStorage.setItem("chakra-ui-color-mode","dark");
 
   return (
