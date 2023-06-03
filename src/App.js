@@ -16,10 +16,28 @@ import './App.css';
 import { useEffect } from 'react';
 import useAppContext from './context/useAppContext';
 import { AppActions } from './context/constants';
+import useTrack from './hooks/useTrack';
 
 function App() {
-  const {dispatch} = useAppContext();
+  const {dispatch,state} = useAppContext();
+  const { isCompleted, trackData, loadLocalStorageData } = useTrack();
   localStorage.setItem("chakra-ui-color-mode","dark");
+
+  useEffect(()=>{
+    if(!isCompleted){
+      loadLocalStorageData();
+    }
+  },[]);
+
+  useEffect(()=>{
+    if(trackData){
+      dispatch({ type : AppActions.INIT_CURRENT_LEVEL, payload : { current_level : trackData?.current_level }  });
+      dispatch({ type : AppActions.INIT_CURRENT_POINTS, payload : { current_points : trackData?.current_points }  });
+      dispatch({ type : AppActions.SET_HINT_LEVELS, payload : { hintLevels : trackData?.hintLevels  } } );
+    }
+  },[trackData]);
+
+  console.log(state);
 
   return (
     <ChakraProvider theme={theme}>

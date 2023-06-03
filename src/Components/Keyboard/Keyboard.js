@@ -9,6 +9,8 @@ import useAppContext from '../../context/useAppContext';
 import { AppActions } from '../../context/constants';
 import { useNavigate } from 'react-router-dom';
 import { levels } from '../../utils/levelsData';
+import HintAnswer from '../HintAnswerModal/HintAnswer';
+import WrongAnswer from '../WrongAnswer/WrongAnswer';
 
 function RowKeys(props){
 
@@ -50,8 +52,10 @@ function RowKeys(props){
 
 function KeyBoard(props){
     const total_levels = levels.length;
+    const [isHintPopupOpened,setHintPopupOpened] = useState(false);
+    const [isAnswerPopupOpened,setAnswerPopupOpened] = useState(false);
     const navigate = useNavigate();
-    const {dispatch} = useAppContext();
+    const {dispatch,state} = useAppContext();
     const [answer,setAnswer] = useState('');
 
     function onDigitKeyClicked(value){
@@ -60,27 +64,43 @@ function KeyBoard(props){
         }
     }
 
+    function checkInHintLevels(){
+        const check = state.hintLevels.find((item)=> item === props.level.level_id );
+        if(check){
+            return true;
+        }
+        return false;
+    }
+
     function onTickMarkButtonClicked(){
         if(props?.level?.level_answer === answer){
-            dispatch({ type : AppActions.SET_CURRENT_LEVEL });
-            dispatch({ type : AppActions.SET_CURRENT_POINTS, 
-                       payload : {
-                                    level_points : props?.level?.level_points
-                                } 
-                    });
+            const isExist = checkInHintLevels();
+
+            if(props?.level?.level_id >= state.current_level){
+                dispatch({ type : AppActions.SET_CURRENT_LEVEL });
+            }
+
+            if(!isExist && props?.level?.level_id >= state.current_level){
+                dispatch({ type : AppActions.SET_CURRENT_POINTS, 
+                    payload : {
+                                 level_points : props?.level?.level_points 
+                             } 
+                 });
+            }
+            
             let next_route = '/';
             if( props?.level && props?.level?.level_id + 1 <= total_levels){
                 next_route = `/level/${props?.level?.level_id + 1}`
             }
             navigate('/result',{
                 state : { 
-                    level_points : props?.level?.level_points,
+                    level_points : isExist ? 0 : props?.level?.level_points,
                     back_route : '/',
                     next_route
                 }
             });
         }else{
-            alert("Wrong Answer");
+            setAnswerPopupState(true);
         }
     }
 
@@ -91,8 +111,20 @@ function KeyBoard(props){
         }
     }
 
+    function setHintPopupState(value){
+        setHintPopupOpened(value);
+    }
+
+    function setAnswerPopupState(value){
+        setAnswerPopupOpened(value);
+    }
+
     function onHintButtonClicked(){
         console.log('Hint button clicked');
+        const isExist = checkInHintLevels();
+        let updatedArr = isExist ? [...state?.hintLevels]  :  [...state?.hintLevels, props?.level?.level_id];
+        dispatch( { type : AppActions.SET_HINT_LEVELS, payload : { hintLevels : updatedArr } } );
+        setHintPopupOpened(true);
     }
 
     const buttonStyle = {
@@ -158,6 +190,12 @@ function KeyBoard(props){
                          row_id={1} />
                 <RowKeys onDigitKeyClicked={onDigitKeyClicked}
                          row_id={2} />
+                <HintAnswer     isOpen={isHintPopupOpened}
+                                level={props?.level}
+                                setHintPopupState={setHintPopupState}/>
+
+                <WrongAnswer    isOpen={isAnswerPopupOpened}
+                                setAnswerPopupState={setAnswerPopupState}/>
                          
             </Box>
         </>

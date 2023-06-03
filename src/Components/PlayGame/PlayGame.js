@@ -7,6 +7,7 @@ function PlayGame(){
     const navigate = useNavigate();
 
     useEffect(()=>{
+        console.log("State : ",state.current_level);
         if(state.current_level){
             navigate(`/level/${state.current_level}`);
         }else{

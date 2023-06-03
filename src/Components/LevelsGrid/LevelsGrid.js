@@ -29,7 +29,7 @@ function LevelsGrid(){
                             overflow={'scroll'}
                             flexWrap='wrap'
                             alignItems='flex-start'
-                            justifyContent='space-between'>
+                            justifyContent='space-evenly'>
                         {
                             levels.map((item)=>{
                                 const isClickable = item?.level_id <= state?.current_level ;
