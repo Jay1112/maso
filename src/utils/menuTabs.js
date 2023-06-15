@@ -30,7 +30,7 @@ export const menuTabsList = [
     {
         icon :  <Icon boxSize={10} as={AiOutlineSetting} />,
         text : 'SETTINGS',
-        route : null,
+        route : '/settings',
     },
     {
         icon :  <Icon boxSize={10} as={FaUserAstronaut} />,

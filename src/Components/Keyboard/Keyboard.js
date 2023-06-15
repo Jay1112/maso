@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import { levels } from '../../utils/levelsData';
 import HintAnswer from '../HintAnswerModal/HintAnswer';
 import WrongAnswer from '../WrongAnswer/WrongAnswer';
+import { toast } from 'react-toastify';
 
 function RowKeys(props){
 
@@ -125,6 +126,16 @@ function KeyBoard(props){
         let updatedArr = isExist ? [...state?.hintLevels]  :  [...state?.hintLevels, props?.level?.level_id];
         dispatch( { type : AppActions.SET_HINT_LEVELS, payload : { hintLevels : updatedArr } } );
         setHintPopupOpened(true);
+        toast('You can not Get points for this Level', {
+            position: "bottom-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
     }
 
     const buttonStyle = {

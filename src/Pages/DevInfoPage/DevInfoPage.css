@@ -1,0 +1,113 @@
+.moveAnimationForLeft {
+    animation-delay: 3s;
+    transition: all 0.5s;
+    animation-name: moveAnimForLeftLogo;
+    animation-duration: 60s;
+    animation-fill-mode:both;
+    animation-iteration-count: infinite;
+}
+
+.moveAnimationForRight {
+    animation-delay: 3s;
+    transition: all 0.5s;
+    animation-name: moveAnimForRightLogo;
+    animation-duration: 60s;
+    animation-fill-mode:both;
+    animation-iteration-count: infinite;
+}
+
+@keyframes moveAnimForLeftLogo {
+    0% {
+        top: 50%;
+        left: 0%;
+        transform: translate(0%,-50%);
+    }
+    12.5% {
+        top: 0%;
+        left: 0%;
+        transform: translate(0%,-50%);
+    }
+    25% {
+        top: 0%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+    37.5% {
+        top: 0%;
+        left: 100%;
+        transform: translate(-100%,-50%);
+    }
+    50%{
+        top: 50%;
+        left: 100%;
+        transform: translate(-100%,-50%);
+    }
+    62.5% {
+        top: 100%;
+        left: 100%;
+        transform: translate(-100%,-50%);
+    }
+    75%{
+        top: 100%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+    87.5% {
+        top: 100%;
+        left: 0%;
+        transform: translate(0%,-50%);
+    }
+    100%{
+        top: 50%;
+        left: 0%;
+        transform: translate(0%,-50%);
+    }
+}
+
+@keyframes moveAnimForRightLogo {
+    0% {
+        top: 50%;
+        left: 100%;
+        transform: translate(-100%,-50%);
+    }
+    12.5% {
+        top: 100%;
+        left: 100%;
+        transform: translate(-100%,-50%);
+    }
+    25% {
+        top: 100%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+    37.5% {
+        top: 100%;
+        left: 0%;
+        transform: translate(0%,-50%);
+    }
+    50%{
+        top: 50%;
+        left: 0%;
+        transform: translate(0%,-50%);
+    }
+    62.5% {
+        top: 0%;
+        left: 0%;
+        transform: translate(0%,-50%);
+    }
+    75%{
+        top: 0%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+    87.5% {
+        top: 0%;
+        left: 100%;
+        transform: translate(-100%,-50%);
+    }
+    100%{
+        top: 50%;
+        left: 100%;
+        transform: translate(-100%,-50%);
+    }
+}

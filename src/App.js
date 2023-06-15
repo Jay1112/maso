@@ -17,6 +17,8 @@ import { useEffect } from 'react';
 import useAppContext from './context/useAppContext';
 import { AppActions } from './context/constants';
 import useTrack from './hooks/useTrack';
+import SettingPage from './Pages/SettingPage/SettingPage';
+import DevInfoPage from './Pages/DevInfoPage/DevInfoPage';
 
 function App() {
   const {dispatch,state} = useAppContext();
@@ -49,6 +51,8 @@ function App() {
                 <Route exact path='/levels' element={<LevelPage/>} />
                 <Route path='/level/:id' element={<SingleLevelPage/>} />
                 <Route path='/play' element={<PlayGame/>} />
+                <Route path='/settings' element={<SettingPage/>}/>
+                <Route path='/dev' element={<DevInfoPage/>}/>
                 <Route path='/result' element={<ResultPage/>} />
                 <Route path='*' element={<PageNotFound/>} />
               </Routes>

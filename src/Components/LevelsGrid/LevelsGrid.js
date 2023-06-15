@@ -23,13 +23,14 @@ function LevelsGrid(){
                     justifyContent='flex-start'
                     overflow={'scroll'}
                     flex='0.9'>
+                    {/* Todo : apply media query for levels flex  */}
                     <Box    padding='0.5rem 0.25rem'
                             width='100%'
                             display='flex'
                             overflow={'scroll'}
                             flexWrap='wrap'
                             alignItems='flex-start'
-                            justifyContent='space-evenly'>
+                            justifyContent='flex-start'>
                         {
                             levels.map((item)=>{
                                 const isClickable = item?.level_id <= state?.current_level ;
